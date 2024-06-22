@@ -1,29 +1,35 @@
 import mysql from 'mysql2/promise';
 import 'dotenv/config';
 
+// Membuat koneksi pool ke database
 const db = mysql.createPool({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
+// Fungsi untuk menguji koneksi database
 const testConnection = async () => {
     try {
         await db.getConnection();
         console.log("Berhasil terhubung ke database");
     } catch (e) {
-        console.log("Gagal terhubung ke database");
+        console.log("Gagal terhubung ke database", e);
     }
 }
 
-const query = async (query, value) => {
+// Fungsi untuk menjalankan query
+const query = async (query, values) => {
     try {
-        const [result] = await db.query(query, value ?? []);
+        const [result] = await db.query(query, values ?? []);
         return result;
     } catch (e) {
         console.log("Gagal menjalankan query", e);
-        throw e; // Melempar error agar bisa ditangani di tempat lain
+        throw e;
     }
 }
 
