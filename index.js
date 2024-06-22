@@ -42,7 +42,7 @@ app.use(
 );
 
 app.use(cors({
-  origin: 'https://foodieframe.vercel.app/', // Atur origin frontend Anda di sini
+  origin: 'https://foodieframe.vercel.app', // Atur origin frontend Anda di sini
   credentials: true
 }));
 app.use(express.json());
