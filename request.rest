@@ -1,0 +1,192 @@
+# create user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "jancok",
+    "email": "samsdsadudra@gmail.com",
+    "password": "12345",
+    "confPassword": "12345",
+    "role": "user"
+}
+###
+# get
+GET http://localhost:5000/users
+
+###
+//get single
+GET http://localhost:5000/users/1
+
+###
+//update user
+PUT http://localhost:5000/users/1
+Content-Type: application/json
+
+{
+    "name": "samudra",
+    "email": "samudra@gmail.com",
+    "password": "11111",
+    "confPassword": "11111",
+    "role": "user"
+}
+
+###
+//delete
+DELETE http://localhost:5000/artikel/7
+
+
+###
+GET http://localhost:5000/me
+Content-Type: application/json
+
+{
+    "email": "samudra@gmail.com",
+    "password": "111"
+}
+
+###
+DELETE http://localhost:5000/logout
+
+
+###
+//login user
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "samudra@gmail.com",
+    "password": "111"
+}
+###
+//login admin
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "111"
+}
+
+###
+# get artikel
+GET http://localhost:5000/resep
+
+###
+//get single
+GET http://localhost:5000/kategori
+
+
+###
+# gposr artikel
+POST http://localhost:5000/artikel
+Content-Type: application/json
+
+{
+    "judul": "sama ajaa",
+    "content": "deskripsi",
+    "gambar": "qqq.png"
+}
+
+###
+# update
+PATCH  http://localhost:5000/artikel/4
+Content-Type: application/json
+
+{
+    "judul": "mie godog",
+    "content": "deskripsi",
+    "gambar": "qqq.png"
+}
+
+###
+# delete artikel
+DELETE  http://localhost:5000/artikel/3
+
+###
+//register
+POST http://localhost:5000/register
+Content-Type: application/json
+
+{
+    "name": "jancok",
+    "email": "sue@gmail.com",
+    "password": "12345",
+    "confPassword": "12345"
+}
+
+###
+# post resep
+POST http://localhost:5000/resep
+Content-Type: application/json
+
+{
+    "judul": "sama ajaa",
+    "bahan": "deskripsi",
+    "langkah": "fef",
+    "linkVideo": "ferfer",
+    "gambar": "qqq.png",
+    "kategoriId" : "2"
+}
+
+###
+# pw
+PUT http://localhost:5000/users/2/update-data
+Content-Type: application/json
+
+{
+    "oldPassword": "samaee ajaa",
+    "password": "deskripsi",
+    "confPassword": "fef"
+}
+
+###
+# post resep
+POST http://localhost:5000/favorite/2/2
+
+Content-Type: application/json
+###
+# post resep
+POST http://localhost:5000/kategori
+Content-Type: application/json
+
+{
+    "kategori": "Ramadhan"
+}
+
+###
+//get single
+GET http://localhost:5000/contacts/5
+
+###
+//update user
+PUT http://localhost:5000/kategori/3
+Content-Type: application/json
+
+{
+    "kategori": "Tiktok"
+}
+
+###
+# delete artikel
+DELETE  http://localhost:5000/kategori/6
+
+###
+# post resep
+POST http://localhost:5000/comments
+Content-Type: application/json
+
+{
+    "komentar": "Ramadhan"
+}
+###
+# post resep
+POST http://localhost:5000/contacts
+Content-Type: application/json
+
+{
+    "email": "Ramadhan@gmail.com",
+    "phone": "1",
+    "subject": "1",
+    "message": "1",
+    "userId": "1"
+}
