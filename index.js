@@ -41,8 +41,10 @@ app.use(
   })
 );
 
-app.use(cors());
-
+app.use(cors({
+  origin: 'https://foodieframe.vercel.app/', // Atur origin frontend Anda di sini
+  credentials: true
+}));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads"))); // Menyajikan folder uploads secara statis
 app.use(router);
