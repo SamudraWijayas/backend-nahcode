@@ -1,24 +1,24 @@
-import express from 'express';
-import path from 'path';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import session from 'express-session';
-import multer from 'multer';
-import { testConnection } from './database/db.js';
-import router from './route/index.js';
+import express from "express";
+import path from "path";
+import dotenv from "dotenv";
+import cors from "cors";
+import session from "express-session";
+import multer from "multer";
+import { testConnection } from "./database/db.js";
+import router from "./route/index.js";
 
 dotenv.config();
 const app = express();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    let uploadPath = 'uploads/';
-    if (req.path.includes('/uploadArticleImage')) {
-      uploadPath += 'artikel/';
-    } else if (req.path.includes('/uploadRecipeImage')) {
-      uploadPath += 'resep/';
-    } else if (req.path.includes('/users')) {
-      uploadPath += 'profil/';
+    let uploadPath = "uploads/";
+    if (req.path.includes("/uploadArticleImage")) {
+      uploadPath += "artikel/";
+    } else if (req.path.includes("/uploadRecipeImage")) {
+      uploadPath += "resep/";
+    } else if (req.path.includes("/users")) {
+      uploadPath += "profil/";
     }
     cb(null, uploadPath);
   },
@@ -31,30 +31,30 @@ const upload = multer({ storage: storage });
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'eververwvergrewgerfwdfwrgh5h5yh56hx`',
+    secret: process.env.SESS_SECRET, // Gunakan variabel lingkungan untuk secret
     resave: false,
     saveUninitialized: true,
     cookie: {
       maxAge: 2 * 60 * 60 * 1000, // 2 jam dalam milidetik
-      secure: 'auto',
+      secure: "auto",
     },
   })
 );
 
 app.use(cors());
+
 app.use(express.json());
-app.use('/uploads', express.static(path.join(process.cwd(), 'uploads'))); // Menyajikan folder uploads secara statis
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads"))); // Menyajikan folder uploads secara statis
 app.use(router);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res
     .status(500)
-    .json({ msg: 'Terjadi kesalahan pada server', error: err.message });
+    .json({ msg: "Terjadi kesalahan pada server", error: err.message });
 });
 
-const port = process.env.APP_PORT || 3000;
-app.listen(port, () => {
+app.listen(process.env.APP_PORT, () => {
   testConnection();
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server is running at http://localhost:${process.env.APP_PORT}`);
 });
